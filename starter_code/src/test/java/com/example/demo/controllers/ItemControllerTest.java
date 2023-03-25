@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -50,17 +50,18 @@ public class ItemControllerTest {
      * Gets items.
      */
     @Test
-    public void getItems() {
+    public void getItemsSuccess() {
         ResponseEntity<List<Item>> response = itemController.getItems();
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals(1, Objects.requireNonNull(response.getBody()).size());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
     }
 
     /**
      * Gets item by id.
      */
     @Test
-    public void getItemById() {
+    public void getItemByIdSuccess() {
         ResponseEntity<Item> response = itemController.getItemById(1L);
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("item name", Objects.requireNonNull(response.getBody()).getName());
@@ -70,7 +71,7 @@ public class ItemControllerTest {
      * Gets items by name.
      */
     @Test
-    public void getItemsByName() {
+    public void getItemsByNameSuccess() {
         ResponseEntity<List<Item>> response = itemController.getItemsByName("item name");
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(1, Objects.requireNonNull(response.getBody()).size());

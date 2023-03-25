@@ -62,10 +62,11 @@ public class UserControllerTest {
    * Find by id.
    */
   @Test
-  public void findById() {
+  public void findByIdSuccess() {
     ResponseEntity<User> response = userController.findById(1L);
     assertEquals(200, response.getStatusCodeValue());
-    assertEquals(1, Objects.requireNonNull(response.getBody()).getId());
+    assertNotNull(response.getBody());
+    assertEquals(1, response.getBody().getId());
   }
 
   /**
@@ -78,17 +79,18 @@ public class UserControllerTest {
   }
 
   /**
-   * Find by user name.
+   * Find by username.
    */
   @Test
-  public void findByUserName() {
+  public void findByUserNameSuccess() {
     ResponseEntity<User> response = userController.findByUserName("NganPV");
     assertEquals(200, response.getStatusCodeValue());
-    assertEquals("NganPV", Objects.requireNonNull(response.getBody()).getUsername());
+    assertNotNull(response.getBody());
+    assertEquals("NganPV", response.getBody().getUsername());
   }
 
   /**
-   * Find by user name not found.
+   * Find by username not found.
    */
   @Test
   public void findByUserNameNotFound() {
@@ -98,10 +100,10 @@ public class UserControllerTest {
 
 
   /**
-   * Create user.
+   * Create user success.
    */
   @Test
-  public void createUser() {
+  public void createUserSuccess() {
     CreateUserRequest request = new CreateUserRequest();
     request.setUsername("NganPV");
     request.setPassword("6543210");
@@ -111,15 +113,15 @@ public class UserControllerTest {
     User user = response.getBody();
     assertNotNull(user);
     assertEquals(0, user.getId());
-    assertEquals("NganPV", user.getUsername());
     assertEquals("654321", user.getPassword());
+    assertEquals("NganPV", user.getUsername());
   }
 
   /**
-   * Create user password confirm not match.
+   * Create user password not match.
    */
   @Test
-  public void createUserPasswordConfirmNotMatch() {
+  public void createUserPasswordNotMatch() {
     CreateUserRequest request = new CreateUserRequest();
     request.setUsername("NganPV");
     request.setPassword("admin");
@@ -129,10 +131,10 @@ public class UserControllerTest {
   }
 
   /**
-   * Create user bad request.
+   * Create user with password policy not correct.
    */
   @Test
-  public void createUserBadRequest() {
+  public void createUserWithPasswordPolicyNotCorrect() {
     CreateUserRequest request = new CreateUserRequest();
     request.setUsername("NganPV");
     request.setPassword("admin");

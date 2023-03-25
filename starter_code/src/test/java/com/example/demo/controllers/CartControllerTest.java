@@ -63,12 +63,11 @@ public class CartControllerTest {
         when(itemRepository.findById(1L)).thenReturn(java.util.Optional.of(item));
     }
 
-
     /**
-     * Add cart ok.
+     * Add cart success.
      */
     @Test
-    public void addCartOk() {
+    public void addCartSuccess() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(1);
         request.setUsername("nganpv");
@@ -83,7 +82,7 @@ public class CartControllerTest {
      * Add cart not found username.
      */
     @Test
-    public void addCartNotFoundUsername() {
+    public void addCartNotFoundByUsername() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(1);
         request.setUsername("nganpv1");
@@ -96,7 +95,7 @@ public class CartControllerTest {
      * Add cart not found item id.
      */
     @Test
-    public void addCartNotFoundItemId() {
+    public void addCartNotFoundByItemId() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(2);
         request.setUsername("nganpv");
@@ -109,7 +108,7 @@ public class CartControllerTest {
      * Remove from cart.
      */
     @Test
-    public void removeFromCart() {
+    public void removeFromCartSuccess() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(1);
         request.setUsername("nganpv");
@@ -129,7 +128,7 @@ public class CartControllerTest {
      * Remove from cart not found user.
      */
     @Test
-    public void removeFromCartNotFoundUser() {
+    public void removeFromCartNotFounBydUser() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(1);
         request.setUsername("nganpv1");
@@ -142,7 +141,7 @@ public class CartControllerTest {
      * Remove from cart not found item id.
      */
     @Test
-    public void removeFromCartNotFoundItemId() {
+    public void removeFromCartNotFoundByItemId() {
         ModifyCartRequest request = new ModifyCartRequest();
         request.setItemId(2);
         request.setUsername("nganpv");

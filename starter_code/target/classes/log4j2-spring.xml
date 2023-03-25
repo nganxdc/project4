@@ -18,11 +18,9 @@
                 disableCertificateValidation="true">
             <PatternLayout pattern="%m" />
         </SplunkHttp>
-
     </Appenders>
 
     <Loggers>
-        <!-- LOG everything at INFO level -->
         <Root level="info">
             <AppenderRef ref="console" />
             <AppenderRef ref="splunkhttp" />

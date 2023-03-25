@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -65,38 +66,40 @@ public class OrderControllerTest {
     }
 
     /**
-     * Submit.
+     * Submit success.
      */
     @Test
-    public void order() {
+    public void submitSuccess() {
         ResponseEntity<UserOrder> response = orderController.submit("NganPV");
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals(1, Objects.requireNonNull(response.getBody()).getItems().size());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().getItems().size());
     }
 
     /**
-     * Submit not found.
+     * Submit not found by username.
      */
     @Test
-    public void orderNotFound() {
+    public void submitNotFoundByUserName() {
         ResponseEntity<UserOrder> response = orderController.submit("NGANPV2");
         assertEquals(404, response.getStatusCodeValue());
     }
 
     /**
-     * Gets orders for user.
+     * Gets orders by username.
      */
     @Test
-    public void getOrdersForUser() {
+    public void getOrdersByUserName() {
         ResponseEntity<List<UserOrder>> orders = orderController.getOrdersForUser("NganPV");
         assertEquals(200, orders.getStatusCodeValue());
+        assertEquals(0, Objects.requireNonNull(orders.getBody()).size());
     }
 
     /**
-     * Gets orders for user not found.
+     * Gets orders for user not exist.
      */
     @Test
-    public void getOrdersForUserNotFound() {
+    public void getOrdersByUserNameNotExist() {
         ResponseEntity<List<UserOrder>> orders = orderController.getOrdersForUser("NGANPV1");
         assertEquals(404, orders.getStatusCodeValue());
 
